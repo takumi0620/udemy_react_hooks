@@ -4,14 +4,15 @@ const App = props => {
   const [state, setState] = useState(props);
   const {name, price} = state;
 
-  // return()(描画された)後によばれる
+  // return()(描画された)後によばれる 描画が更新されたら呼ばれる
   useEffect(() => {
     console.log('あああああ');
   });
 
+  // return()(描画された)後によばれる []に渡したものが更新されたら呼ばれる
   useEffect(() => {
     console.log('いいいいい');
-  }, []);
+  }, [name]);
 
   const renderPeriod = () => {
     console.log('kakaka');
