@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EventForm from './EventForm';
 import Events from './Events';
@@ -9,11 +9,17 @@ import reducer from '../reducers';
 console.log({AppContext});
 
 const App = () => {
-  const initialState = {
+  const appState = localStorage.getItem('appWithRedux');
+  const initialState = appState ? JSON.parse(appState) : {
     events: [],
     operationLogs: []
   };
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    localStorage.setItem('appWithRedux', JSON.stringify(state));
+  }, [state]);
+
   return (
     <AppContext.Provider value={{state, dispatch}}>
       <div className="container-fluid">
